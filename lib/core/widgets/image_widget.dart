@@ -16,7 +16,7 @@ class ImageWidget extends StatelessWidget {
           borderRadius: borderRadius ?? _defaultBorderRadius,
           child: Image.network(
             source,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
 

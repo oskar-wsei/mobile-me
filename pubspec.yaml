@@ -1,6 +1,6 @@
 name: mobile_me
-description: "A new Flutter project."
-publish_to: "none"
+description: 'A new Flutter project.'
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  carousel_slider: ^5.0.0
   dartz: ^0.10.1
   flutter_bloc: ^9.1.0
   get_it: ^8.0.3
