@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_me/core/posts/model/post_model.dart';
+import 'package:mobile_me/core/widgets/tags_widget.dart';
 
 class PostItemWidget extends StatelessWidget {
   final PostModel post;
@@ -30,13 +31,7 @@ class PostItemWidget extends StatelessWidget {
             child: Column(
               spacing: 16,
               children: [
-                Row(
-                  spacing: 8,
-                  children: [
-                    for (final tag in post.tags)
-                      Text('#$tag', style: const TextStyle(color: Colors.grey)),
-                  ],
-                ),
+                TagsWidget(tags: post.tags),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

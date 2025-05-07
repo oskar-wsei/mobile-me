@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_me/core/products/model/product_model.dart';
+import 'package:mobile_me/core/widgets/image_widget.dart';
+import 'package:mobile_me/core/widgets/tags_widget.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel product;
@@ -11,7 +13,7 @@ class ProductItemWidget extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Image.network(product.thumbnail),
+          ImageWidget(source: product.thumbnail),
           SizedBox(height: 12),
           ListTile(
             title: Padding(
@@ -29,18 +31,7 @@ class ProductItemWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-            child: Column(
-              spacing: 16,
-              children: [
-                Row(
-                  spacing: 8,
-                  children: [
-                    for (final tag in product.tags)
-                      Text('#$tag', style: const TextStyle(color: Colors.grey)),
-                  ],
-                ),
-              ],
-            ),
+            child: TagsWidget(tags: product.tags),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
