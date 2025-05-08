@@ -10,19 +10,19 @@ import 'package:mobile_me/core/auth/model/auth_login_response.dart';
 class AuthService {
   final http.Client client = locator<http.Client>();
 
-  Future<Either<HttpErrorResponse, AuthLoginResponse>> login(AuthLoginRequest model) async {
+  Future<Either<HttpErrorResponse, AuthLoginResponse>> login(
+    AuthLoginRequest model,
+  ) async {
     final response = await client.post(
       Uri.https('dummyjson.com', 'auth/login'),
       body: model.toJson(),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode != HttpStatus.ok) {
       return Left(HttpErrorResponse.fromJson(response.body));
     }
-    
+
     return Right(AuthLoginResponse.fromJson(response.body));
   }
 }
