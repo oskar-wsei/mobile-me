@@ -84,9 +84,9 @@ class ProductModel {
       title: map['title'],
       description: map['description'],
       category: map['category'],
-      price: map['price'],
+      price: map['price'].toDouble(),
       discountPercentage: map['discountPercentage'].toDouble(),
-      rating: map['rating'],
+      rating: map['rating'].toDouble(),
       stock: map['stock'],
       tags: List<String>.from(map['tags']),
       brand: map['brand'],
@@ -191,9 +191,9 @@ class ProductDimensionsModel {
 
   factory ProductDimensionsModel.fromMap(Map<String, dynamic> map) {
     return ProductDimensionsModel(
-      width: map['width'],
-      height: map['height'],
-      depth: map['depth'],
+      width: map['width'].toDouble(),
+      height: map['height'].toDouble(),
+      depth: map['depth'].toDouble(),
     );
   }
 

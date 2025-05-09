@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_me/common/bloc/model_state.dart';
 import 'package:mobile_me/core/recipes/bloc/recipe_bloc.dart';
-import 'package:mobile_me/core/recipes/bloc/recipe_event.dart';
-import 'package:mobile_me/core/recipes/bloc/recipe_state.dart';
+import 'package:mobile_me/core/recipes/model/recipe_model.dart';
 import 'package:mobile_me/core/recipes/widgets/recipe_item_widget.dart';
 import 'package:mobile_me/core/widgets/drawer_widget.dart';
 import 'package:mobile_me/core/widgets/header_widget.dart';
-import 'package:mobile_me/core/widgets/title_widget.dart';
+import 'package:mobile_me/core/widgets/model_list_builder_widget.dart';
 
 class RecipesPage extends StatelessWidget {
   const RecipesPage({super.key});
@@ -17,45 +17,16 @@ class RecipesPage extends StatelessWidget {
       appBar: HeaderWidget(),
       drawer: DrawerWidget(),
       body: SafeArea(
-        child: BlocBuilder<RecipeBloc, RecipeState>(
+        child: BlocBuilder<RecipeBloc, ModelState>(
           builder: (context, state) {
-            if (state is RecipeLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (state is RecipeErrorState) {
-              return Center(child: Text('Error: ${state.message}'));
-            }
-
-            if (state is RecipeLoadedState) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  context.read<RecipeBloc>().add(RecipeLoadEvent());
-                },
-                child: Column(
-                  children: [
-                    TitleWidget(title: 'Recipes', icon: Icons.receipt_long),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.separated(
-                          itemCount: state.recipes.length,
-                          itemBuilder: (context, index) {
-                            return RecipeItemWidget(
-                              recipe: state.recipes[index],
-                            );
-                          },
-                          separatorBuilder:
-                              (context, index) => const SizedBox(height: 8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            return Container();
+            return ModelListBuilderWidget<RecipeModel, RecipeBloc>(
+              state: state,
+              title: 'Recipes',
+              icon: Icons.receipt_long,
+              itemBuilder: (context, model) {
+                return RecipeItemWidget(recipe: model);
+              },
+            );
           },
         ),
       ),

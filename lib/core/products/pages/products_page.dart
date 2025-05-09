@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_me/common/bloc/model_state.dart';
 import 'package:mobile_me/core/products/bloc/product_bloc.dart';
-import 'package:mobile_me/core/products/bloc/product_event.dart';
-import 'package:mobile_me/core/products/bloc/product_state.dart';
+import 'package:mobile_me/core/products/model/product_model.dart';
 import 'package:mobile_me/core/products/widgets/product_item_widget.dart';
 import 'package:mobile_me/core/widgets/drawer_widget.dart';
 import 'package:mobile_me/core/widgets/header_widget.dart';
-import 'package:mobile_me/core/widgets/title_widget.dart';
+import 'package:mobile_me/core/widgets/model_list_builder_widget.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -17,45 +17,16 @@ class ProductsPage extends StatelessWidget {
       appBar: HeaderWidget(),
       drawer: DrawerWidget(),
       body: SafeArea(
-        child: BlocBuilder<ProductBloc, ProductState>(
+        child: BlocBuilder<ProductBloc, ModelState>(
           builder: (context, state) {
-            if (state is ProductLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (state is ProductErrorState) {
-              return Center(child: Text('Error: ${state.message}'));
-            }
-
-            if (state is ProductLoadedState) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  context.read<ProductBloc>().add(ProductLoadEvent());
-                },
-                child: Column(
-                  children: [
-                    TitleWidget(title: 'Products', icon: Icons.shopping_bag),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.separated(
-                          itemCount: state.products.length,
-                          itemBuilder: (context, index) {
-                            return ProductItemWidget(
-                              product: state.products[index],
-                            );
-                          },
-                          separatorBuilder:
-                              (context, index) => const SizedBox(height: 8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            return Container();
+            return ModelListBuilderWidget<ProductModel, ProductBloc>(
+              state: state,
+              title: 'Products',
+              icon: Icons.shopping_bag,
+              itemBuilder: (context, model) {
+                return ProductItemWidget(product: model);
+              },
+            );
           },
         ),
       ),
