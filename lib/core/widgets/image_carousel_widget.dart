@@ -49,6 +49,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
             currentIndex: _currentIndex,
             imagesCount: widget.images.length,
           ),
+          SizedBox(height: 20),
         ],
       ],
     );
@@ -58,6 +59,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
 class CarouselIndicator extends StatelessWidget {
   final int imagesCount;
   final int currentIndex;
+
   const CarouselIndicator({
     super.key,
     required this.imagesCount,

@@ -3,6 +3,7 @@ import 'package:mobile_me/common/utils/navigation_utils.dart';
 import 'package:mobile_me/core/products/model/product_model.dart';
 import 'package:mobile_me/core/widgets/image_widget.dart';
 import 'package:mobile_me/core/products/pages/product_detail_page.dart';
+import 'package:mobile_me/core/widgets/tags_widget.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel product;
@@ -38,18 +39,7 @@ class ProductItemWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
               child: Column(
                 spacing: 16,
-                children: [
-                  Row(
-                    spacing: 8,
-                    children: [
-                      for (final tag in product.tags)
-                        Text(
-                          '#$tag',
-                          style: const TextStyle(color: Colors.grey),
-                        ),
-                    ],
-                  ),
-                ],
+                children: [TagsWidget(tags: product.tags)],
               ),
             ),
             Padding(

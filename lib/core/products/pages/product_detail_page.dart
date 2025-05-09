@@ -6,16 +6,11 @@ import 'package:mobile_me/core/products/widgets/product_info_widget.dart';
 import 'package:mobile_me/core/widgets/drawer_widget.dart';
 import 'package:mobile_me/core/widgets/header_widget.dart';
 
-class ProductDetailPage extends StatefulWidget {
+class ProductDetailPage extends StatelessWidget {
   final ProductModel product;
 
   const ProductDetailPage({super.key, required this.product});
 
-  @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
-}
-
-class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +21,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageCarouselWidget(images: widget.product.images),
-              SizedBox(height: 20),
-              ProductInfoWidget(product: widget.product),
+              ImageCarouselWidget(images: product.images),
+              ProductInfoWidget(product: product),
             ],
           ),
         ),
       ),
       bottomNavigationBar: PriceBarWidget(
-        price: widget.product.price,
-        discountPercentage: widget.product.discountPercentage,
+        price: product.price,
+        discountPercentage: product.discountPercentage,
       ),
     );
   }

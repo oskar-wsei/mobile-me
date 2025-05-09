@@ -29,9 +29,9 @@ class ProductInfoWidget extends StatelessWidget {
               children: [
                 Text(
                   product.title,
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500, height: 1.2),
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 10),
                 Row(
                   children: [
                     for (final tag in product.tags)

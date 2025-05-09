@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class QuantitySelector extends StatelessWidget {
+class QuantitySelector extends StatefulWidget {
   final int quantity;
   final int maxQuantity;
 
@@ -16,8 +16,16 @@ class QuantitySelector extends StatelessWidget {
   });
 
   @override
+  State<QuantitySelector> createState() => _QuantitySelectorState();
+}
+
+class _QuantitySelectorState extends State<QuantitySelector> {
+  late int _quantity = widget.quantity;
+
+  @override
   Widget build(BuildContext context) {
-    final canDecrement = quantity > 1;
+    final canDecrement = _quantity > 1;
+    final canIncrement = _quantity < widget.maxQuantity;
 
     return Container(
       decoration: BoxDecoration(
@@ -28,19 +36,31 @@ class QuantitySelector extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            onPressed: canDecrement ? onDecrement : null,
+            onPressed: canDecrement ? _decrement : null,
             icon: Icon(Icons.remove),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              '$quantity',
+              '$_quantity',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          IconButton(onPressed: onIncrement, icon: Icon(Icons.add)),
+          IconButton(onPressed: canIncrement ? _increment : null, icon: Icon(Icons.add)),
         ],
       ),
     );
+  }
+
+  void _decrement() {
+    _quantity--;
+    widget.onDecrement();
+    setState(() {});
+  }
+
+  void _increment() {
+    _quantity++;
+    widget.onIncrement();
+    setState(() {});
   }
 }
