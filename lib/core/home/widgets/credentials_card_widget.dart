@@ -4,6 +4,7 @@ import 'package:mobile_me/core/home/widgets/info_row_widget.dart';
 
 class CredentialsCardWidget extends StatelessWidget {
   final UserModel user;
+
   const CredentialsCardWidget({super.key, required this.user});
 
   @override
@@ -33,11 +34,14 @@ class CredentialsCardWidget extends StatelessWidget {
                   const SizedBox(height: 12),
                   InfoRowWidget(label: 'Age', value: user.age.toString()),
                   const SizedBox(height: 8),
-                  InfoRowWidget(label: 'Date of Birth', value: '1410'),
+                  InfoRowWidget(
+                    label: 'Date of Birth',
+                    value: user.birthDate.toString(),
+                  ),
                   const SizedBox(height: 8),
-                  InfoRowWidget(label: 'Gender', value: 'female'),
+                  InfoRowWidget(label: 'Gender', value: user.gender),
                   const SizedBox(height: 8),
-                  InfoRowWidget(label: 'Blood Type', value: 'AB'),
+                  InfoRowWidget(label: 'Blood Type', value: user.bloodGroup),
                 ],
               ),
             ),

@@ -98,7 +98,7 @@ class ProductImageWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        margin: EdgeInsets.all(12),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: ImageWidget(source: imageUrl),

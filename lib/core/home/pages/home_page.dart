@@ -56,68 +56,64 @@ class _HomePageState extends State<HomePage> {
                 onRefresh: () async {
                   await context.read<UserCubit>().loadUserData(state.user.id);
                 },
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CredentialsCardWidget(user: state.user),
-                          SizedBox(height: 10),
-                          ContactCardWidget(user: state.user),
-                          SizedBox(height: 10),
-                          SizedBox(
-                            height: 180,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: AddressCardWidget(
-                                    address: state.user.address,
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      bottom: 4,
-                                      top: 4,
-                                      right: 4,
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image.asset(
-                                        'lib/common/assets/images/map.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          CompanyCardWidget(company: state.user.company),
-                          SizedBox(height: 10),
-                          Row(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CredentialsCardWidget(user: state.user),
+                        SizedBox(height: 10),
+                        ContactCardWidget(user: state.user),
+                        SizedBox(height: 10),
+                        SizedBox(
+                          height: 180,
+                          child: Row(
                             children: [
                               Expanded(
-                                child: BankInfoCardWidget(
-                                  bank: state.user.bank,
+                                child: AddressCardWidget(
+                                  address: state.user.address,
                                 ),
                               ),
                               SizedBox(width: 10),
                               Expanded(
-                                child: CryptoCardWidget(
-                                  crypto: state.user.crypto,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    bottom: 4,
+                                    top: 4,
+                                    right: 4,
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      'lib/common/assets/images/map.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 10),
+                        CompanyCardWidget(company: state.user.company),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: BankInfoCardWidget(bank: state.user.bank),
+                            ),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: CryptoCardWidget(
+                                crypto: state.user.crypto,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               );
             }

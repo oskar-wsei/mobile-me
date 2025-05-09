@@ -42,34 +42,38 @@ class RecipeItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 8,
-              children: [
-                TagsWidget(tags: recipe.tags),
-                SizedBox(height: 4),
-                _TextIconWidget(
-                  Icons.menu_book,
-                  '${recipe.prepTimeMinutes} min preparation',
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 16,
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8,
+                    children: [
+                      TagsWidget(tags: recipe.tags),
+                      SizedBox(height: 4),
+                      _TextIconWidget(
+                        Icons.menu_book,
+                        '${recipe.prepTimeMinutes} min preparation',
+                      ),
+                      _TextIconWidget(
+                        Icons.timer_outlined,
+                        '${recipe.cookTimeMinutes} min cooking',
+                      ),
+                      _TextIconWidget(
+                        Icons.restaurant,
+                        '${recipe.servings} servings',
+                      ),
+                      _TextIconWidget(
+                        Icons.local_pizza,
+                        '${recipe.caloriesPerServing} kcal',
+                      ),
+                      RatingWidget(rating: recipe.rating),
+                    ],
+                  ),
                 ),
-                _TextIconWidget(
-                  Icons.timer_outlined,
-                  '${recipe.cookTimeMinutes} min cooking',
-                ),
-                _TextIconWidget(
-                  Icons.restaurant,
-                  '${recipe.servings} servings',
-                ),
-                _TextIconWidget(
-                  Icons.local_pizza,
-                  '${recipe.caloriesPerServing} kcal',
-                ),
-                RatingWidget(rating: recipe.rating),
               ],
             ),
           ),

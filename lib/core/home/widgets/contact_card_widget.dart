@@ -3,6 +3,7 @@ import 'package:mobile_me/core/home/model/user_model.dart';
 
 class ContactCardWidget extends StatelessWidget {
   final UserModel user;
+
   const ContactCardWidget({super.key, required this.user});
 
   @override

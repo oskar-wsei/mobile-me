@@ -18,6 +18,7 @@ class InfoRowWidget extends StatelessWidget {
             style: TextStyle(color: Colors.grey[400]),
             maxLines: 1,
             overflow: TextOverflow.clip,
+            textAlign: TextAlign.right,
           ),
         ),
       ],
